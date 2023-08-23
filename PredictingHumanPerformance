@@ -1,0 +1,22 @@
+import pandas as pd
+from sklearn.linear_regression import LinearRegression
+
+# Load the data.
+data = pd.read_csv("human_performance.csv")
+
+# Identify the features and the target variable.
+features = ["age", "gender", "experience", "training"]
+target = "performance"
+
+# Split the data into a training set and a test set.
+train_data, test_data = data.split(0.2)
+
+# Train the linear regression model.
+model = LinearRegression()
+model.fit(train_data[features], train_data[target])
+
+# Predict human performance on the test data.
+predictions = model.predict(test_data[features])
+
+# Evaluate the model's performance.
+print(model.score(test_data[features], test_data[target]))
